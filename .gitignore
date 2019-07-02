@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MongoDbAggregationTest/v15/Server/sqlite3
+/MongoDbAggregationTest/bin/Debug/netcoreapp2.2
+/MongoDbAggregationTest/obj
