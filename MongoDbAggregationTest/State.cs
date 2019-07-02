@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace MongoDB.Samples.AggregationFramework.Library
+namespace MongoDbAggregationTest
 {
     public class State
     {

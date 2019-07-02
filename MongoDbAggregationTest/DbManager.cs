@@ -7,7 +7,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace MongoDB.Samples.AggregationFramework.Library
+namespace MongoDbAggregationTest
 {
     public class DbManager
     {

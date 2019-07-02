@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MongoDB.Samples.AggregationFramework.Library
+namespace MongoDbAggregationTest
 {
     public class CensusArea
     {

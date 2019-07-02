@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MongoDB.Samples.AggregationFramework.Library
+﻿namespace MongoDbAggregationTest
 {
 
     public class MongoDBSettings
