@@ -39,6 +39,28 @@ namespace MongoDbAggregationTest
         }
         public static async Task<int> GetDataWithAgrregateLookup2()
         {
+            var project = new BsonDocument
+            {
+                {
+                    "$project", new BsonDocument
+                    {
+                        { "_id", 0},
+                        { "CD_CLIENTE", 1},
+                        { "CD_ACESSO", 1 },
+                        { "NOME", 1},
+                        { "EMAIL", 1 },
+                        { "FG_KIPER_MOBILE", 1 },
+                        { "GRUPO", "$GRUPO.NM_DESCRICAO" },
+                        { "UNIDADE", "$UNIDADE.NM_DESCRICAO" },
+                        { "NU_TELEFONE", new BsonDocument{{ "$cond", new BsonArray{new BsonDocument{{"$eq", new BsonArray{ "$NU_TELEFONE", new BsonDocument { } } }}, "","$NU_TELEFONE" } }}},
+                        { "TAG", new BsonDocument{{ "$cond", new BsonArray{new BsonDocument{{"$eq", new BsonArray{ "$NU_KIPER_TAG", new BsonDocument { } } }}, 0,1 } }}},
+                        { "CONTROLE", new BsonDocument{{ "$cond", new BsonArray{new BsonDocument{{"$eq", new BsonArray{ "$NU_KIPER_RF", new BsonDocument { } } }}, 0,1 } }}},
+                        { "APPATIVO", new BsonDocument{{ "$cond", new BsonArray{new BsonDocument{{"$eq", new BsonArray{ "$KEY_HASH", new BsonDocument { } } }}, "", "$KEY_HASH" } }}},
+                    }
+                }
+            };
+
+
             var collection = GetCollection(personCollection);
             var result = collection.Aggregate()
             .Project(@"{_id : 1, 
@@ -67,7 +89,8 @@ namespace MongoDbAggregationTest
             var filterBuilder = new FilterDefinitionBuilder<BsonDocument>();
             var managerFilter = filterBuilder.Eq("ManagerNr", "100670");
             var monthFilter = filterBuilder.In("Month", new[] { 10, 12 });
-            var filter = managerFilter & monthFilter;
+            var minDateFilter = filterBuilder.Ne("DateOfBirth", DateTime.MinValue);
+            var filter = managerFilter & monthFilter & minDateFilter;
             return filter;
         }
 
