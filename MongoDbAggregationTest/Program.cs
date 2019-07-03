@@ -5,12 +5,49 @@ using System.Collections.Generic;
 
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
+using MongoDB.Driver;
+using System.Threading.Tasks;
+
 namespace MongoDbAggregationTest
 {
     class Program
     {
-        static void Main(string[] args)
+        private static IMongoDatabase database;
+        static string parentCollection = "customer";
+        static string childCollection = "order";
+        static async Task Main(string[] args)
         {
+
+
+            DbManager2.GetDatabase();
+            //await DbManager2.CreateCollection();
+            var elapseds = await DbManager2.GetDataWithAgrregateLookup2();
+            var elapsed = await DbManager2.GetDataWithAgrregateLookup();
+            Console.WriteLine($"It took {elapsed} seconds to get the data with aggregate lookup");
+            Console.WriteLine();
+            elapsed = await DbManager2.GetDataWithAgrregateLookupPipeline();
+            Console.WriteLine($"It took {elapsed} seconds to get the data with aggregate lookup pipeline");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadLine();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
